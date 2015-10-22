@@ -1,0 +1,4 @@
+﻿function add_custom_admin_styles() {
+	echo '<style>#wpadminbar *{color:#fff;} #wpadminbar {background-color:#2a5381; background-image:-webkit-linear-gradient(bottom, #2a5381, #2a5381 5px);}</style>';
+}
+add_action('admin_head', 'add_custom_admin_styles');

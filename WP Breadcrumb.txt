@@ -1,0 +1,63 @@
+﻿/*breadcrumb*/
+if ( ! function_exists( 'glb_breadcrumb' ) ) :
+function glb_breadcrumb() {
+    global $post;
+    echo '<ul class="breadcrumbs">';
+	if (!is_front_page()) {
+		echo '<li><a href="';
+		echo get_option('home');
+		echo '">';
+		//bloginfo('name');
+		echo "HOME</a> </li>";
+		if ( is_singular('autor') ) {
+			echo '<li><a href="'. get_bloginfo('url') .'/literatura/">Literatura</a></li>';
+			echo '<li><a href="'. get_bloginfo('url') .'/literatura/autores/">Autores</a></li>';
+			echo '<li><a href="';
+			echo get_permalink(); 
+			echo '">';
+			echo the_title();
+			echo "</a></li>";
+		} elseif ( is_category() || is_single() ) {
+			echo '<li>';
+			the_category(', ');
+			echo "</li>";
+			if ( is_single() ) {
+				echo '<li><a href="';
+				echo get_permalink(); 
+				echo '">';
+				echo get_the_title();
+				echo "</a></li>";
+			}
+		} elseif ( is_page() && $post->post_parent ) {
+			$home = get_page_by_title('home');
+			for ($i = count($post->ancestors)-1; $i >= 0; $i--) {
+				if (($home->ID) != ($post->ancestors[$i])) {
+					echo '<li><a href="';
+					echo get_permalink($post->ancestors[$i]); 
+					echo '">';
+					echo get_the_title($post->ancestors[$i]);
+					echo "</a> </li>";
+				}
+			}
+			echo '<li><a href="';
+			echo get_permalink(); 
+			echo '">';
+			echo the_title();
+			echo "</a></li>";
+		} elseif (is_page()) {
+			echo '<li><a href="';
+			echo get_permalink(); 
+			echo '">';
+			echo the_title();
+			echo "</a></li>";
+		} elseif (is_404()) {
+			echo '<li>';
+			echo "404 - Não encontrado";
+			echo "</li>";
+		}
+	} else {
+		bloginfo('name');
+	}
+	echo '</ul><!-- end breadcrumbs -->';
+}
+endif; // ends breadcrumbs()

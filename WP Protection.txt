@@ -1,0 +1,12 @@
+﻿//muda mensagem de erro de login
+function login_error_override()
+{
+    return 'Login incorreto.';
+}
+add_filter('login_errors', 'login_error_override');
+
+//desliga XML RPC
+add_filter('xmlrpc_enabled', '__return_false');
+
+//em wp-config
+define( 'DISALLOW_FILE_EDIT', true );
