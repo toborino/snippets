@@ -1,0 +1,3 @@
+//Problemas com JQuery e Mídia
+//incluir em wp-config.php
+define( 'CONCATENATE_SCRIPTS', false );
