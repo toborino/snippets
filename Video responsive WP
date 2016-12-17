@@ -1,0 +1,22 @@
+//Make oembed video responsive
+//WP code
+add_filter('embed_oembed_html', 'wrap_embed_with_div', 10, 3);
+function wrap_embed_with_div($html, $url, $attr) {
+        return "<div class=\"responsive-container\">".$html."</div>";
+}
+//CSS
+.responsive-container {
+        position: relative;
+        padding-bottom: 50.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+        margin-bottom: 1em;
+}
+.responsive-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+}
